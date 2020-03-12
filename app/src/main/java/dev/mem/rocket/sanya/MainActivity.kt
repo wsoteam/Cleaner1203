@@ -19,6 +19,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
 import com.google.android.gms.ads.AdRequest
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener
 
 import dev.mem.rocket.sanya.AAA.AlarmBroadCastReceiver
 import dev.mem.rocket.sanya.Volume.MyPagerAdapter
@@ -38,7 +39,14 @@ class MainActivity : AppCompatActivity(), Preference.OnPreferenceClickListener {
 
     //todo Prefs
     internal var consent: Boolean = false
+    var counter = 0
 
+    val BOOSTER = 0
+    val BATTERY = 1
+    val FAN = 2
+    val CLEAN = 3
+    val SUB = 4
+    val PAGE_COUNT = 4
 
     private val isNetworkAvailable: Boolean
         get() {
@@ -142,40 +150,27 @@ class MainActivity : AppCompatActivity(), Preference.OnPreferenceClickListener {
 
         ////// Create Tabs Layout.
 
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.phonebooster))
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.battery_saver))
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.cooler))
-        tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.cleaner))
-        Log.i("adsShow", adsShow.toString())
-        if (false) {
-            tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ads))
+        if (true) {
+            tab_layout.menu.removeItem(R.id.nav_rem)
+            //tab_layout.addTab(tab_layout.newTab().setIcon(R.drawable.ads))
         }
-        tab_layout.tabGravity = TabLayout.GRAVITY_FILL
-
-        val adapter = MyPagerAdapter(supportFragmentManager, tab_layout.tabCount)
+        val adapter = MyPagerAdapter(supportFragmentManager, tab_layout.maxItemCount)
         pager.adapter = adapter
+        pager.offscreenPageLimit = tab_layout.maxItemCount
+        pager.beginFakeDrag()
 
-        pager.offscreenPageLimit = 4
-        //        viewPager.setCurrentItem(4);
-
-        pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
-
-        tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-
-                pager.currentItem = tab.position
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
+        tab_layout.setOnNavigationItemSelectedListener(object : OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.nav_boost -> pager.currentItem = BOOSTER
+                    R.id.nav_battery -> pager.currentItem = BATTERY
+                    R.id.nav_fan -> pager.currentItem = FAN
+                    R.id.nav_delete -> pager.currentItem = CLEAN
+                    R.id.nav_rem -> pager.currentItem = SUB
+                }
+                return true
             }
         })
-        //PopUpAds.ShowInterstitialAds(getApplicationContext());
 
         if (intent.getBooleanExtra("fromService", false)) {
             pager.currentItem = 3

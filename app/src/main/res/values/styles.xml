@@ -49,4 +49,12 @@
         <item name="android:textColor">@color/btn_white</item>
     </style>
 
+    <style name="AppTheme.BottomItemTextView">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:textSize">9sp</item>
+    </style>
+
 </resources>

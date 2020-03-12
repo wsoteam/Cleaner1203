@@ -52,17 +52,22 @@
         android:layout_weight="1"
         />
 
-    <com.google.android.material.tabs.TabLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#43A22C"
-        android:elevation="6dp"
-        app:tabBackground="@drawable/tab_color_selector"
-        android:minHeight="?android:attr/actionBarSize"
-        android:layout_gravity="bottom"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:tabIndicatorColor="#FFFFFF"
-        />
+        android:layout_height="50dp"
+        android:background="?android:attr/windowBackground"
+        android:backgroundTint="#27282d"
+        android:theme="@style/Widget.BottomNavigationView"
+        app:itemIconTint="@drawable/bnv_main_selector"
+        app:itemTextAppearanceActive="@style/AppTheme.BottomItemTextView"
+        app:itemTextAppearanceInactive="@style/AppTheme.BottomItemTextView"
+        app:itemTextColor="@color/black"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_goneMarginEnd="@dimen/cardview_default_radius"
+        app:menu="@menu/bottom_navigation_main" />
 
 </LinearLayout>

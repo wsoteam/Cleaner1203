@@ -138,14 +138,13 @@
 
             <Button
                 android:id="@+id/optbutton"
-                style="@style/HabraThemeButton"
+                android:background="@drawable/shape_button"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:text="@string/optimize"
                 android:textColor="@android:color/background_light"
-
                 />
 
         </LinearLayout>

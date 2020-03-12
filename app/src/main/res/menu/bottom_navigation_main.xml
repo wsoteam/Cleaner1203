@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+  <item
+      android:id="@+id/nav_boost"
+      android:icon="@drawable/ic_nav_boost" />
+
+  <item
+      android:id="@+id/nav_battery"
+      android:icon="@drawable/ic_nav_battery" />
+
+  <item
+      android:id="@+id/nav_fan"
+      android:icon="@drawable/ic_nav_fan" />
+
+  <item
+      android:id="@+id/nav_delete"
+      android:icon="@drawable/ic_nav_delete" />
+
+  <item
+      android:id="@+id/nav_rem"
+      android:icon="@drawable/ic_giftbox" />
+</menu>
