@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "584573067521",
+    "firebase_url": "https://project-4385387169649927453.firebaseio.com",
+    "project_id": "project-4385387169649927453",
+    "storage_bucket": "project-4385387169649927453.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584573067521:android:1448a2bfdee2fa6bd17b00",
+        "android_client_info": {
+          "package_name": "dev.mem.rocket.sanya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584573067521-5ttq9ebctd8n69t4ec3vgvdtnm1mv5fu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-3mmPob-wVcEfENBG_PO3vXUZy_XlaMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584573067521-5ttq9ebctd8n69t4ec3vgvdtnm1mv5fu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3050564412171997~2614279530"
+    }
+  ],
+  "configuration_version": "1"
+}
