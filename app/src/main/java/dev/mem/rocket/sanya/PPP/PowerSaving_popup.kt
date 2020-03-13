@@ -6,6 +6,7 @@ import android.os.Bundle
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.animation.OvershootInterpolator
+import com.google.android.gms.ads.AdRequest
 
 import dev.mem.rocket.sanya.OOP.PowersClass
 
@@ -32,38 +33,26 @@ class PowerSaving_popup : Activity() {
         val b = intent.extras
         setContentView(R.layout.powersaving_popup)
 
-//        mAdView = findViewById(R.id.adView)
-//        val adRequest = AdRequest.Builder().build()
-//        mAdView!!.loadAd(adRequest)
+        /*mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView!!.loadAd(adRequest)*/
 
 
         items = ArrayList()
         applied.setOnClickListener {
             PreferencesProvider.getInstance().edit()
-                    .putString("mode", "1")
-                    .apply()
+                .putString("mode", "1")
+                .apply()
 
             val i = Intent(applicationContext, PowerSaving_Complition::class.java)
             startActivity(i)
 
             finish()
         }
-
-        recycler_view.itemAnimator = SlideInLeftAnimator()
-        //                RecyclerView recycler_view = (RecyclerView) findViewById(R.id.list);
-        //                recycler_view.setItemAnimator(new SlideInUpAnimator(new OvershootInterpolator(1f)));
-
-        recycler_view.itemAnimator!!.addDuration = 200
-
-        mAdapter = PowerAdapter(items)
-        val mLayoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
-        recycler_view.layoutManager = mLayoutManager
-        recycler_view.itemAnimator = SlideInUpAnimator(OvershootInterpolator(1f))
-        recycler_view.computeHorizontalScrollExtent()
-        recycler_view.adapter = mAdapter
-        mAdapter.notifyDataSetChanged()
-
-
+        abnb_normal_charge.setAnimation("8577-battery.json")
+        abnb_normal_charge.frame = 51
+        abnb_normal_charge.loop(true)
+        abnb_normal_charge.playAnimation()
     }
 
     fun add(text: String, position: Int) {
