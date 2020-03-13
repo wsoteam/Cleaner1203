@@ -26,6 +26,7 @@ import dev.mem.rocket.sanya.BCJ.Junk_Apps_Adapter
 import dev.mem.rocket.sanya.OOP.ApplicationsClass
 
 import com.github.ybq.android.spinkit.style.ThreeBounce
+import com.google.android.gms.ads.AdRequest
 import com.skyfishjy.library.RippleBackground
 
 import java.util.ArrayList
@@ -62,41 +63,8 @@ class Scanning_Junk : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate
         }
 
     private fun startFinishAnim() {
-        scan1.hide()
-        scan2.hide()
-        scan3.hide()
-        scan4.hide()
-        scan5.hide()
-        scan6.hide()
-        val rippleBackground = findViewById<View>(R.id.content) as RippleBackground
-        rippleBackground.startRippleAnimation()
-        //                front.setImageResource(0);
-        //                imageView.setImageResource(0);
-        //                front.setImageDrawable(ContextCompat.getDrawable(Scanning_Junk.this, R.drawable.task_complete));
-        //                imageView.setImageDrawable(ContextCompat.getDrawable(Scanning_Junk.this, R.drawable.green_circle));
-        front.setImageResource(R.drawable.task_complete)
-        back.setImageResource(R.drawable.green_circle)
-
-        val doubleBounce = ThreeBounce()
-        spin_kit.setIndeterminateDrawable(doubleBounce)
-        spin_kit.visibility = View.GONE
-
-        scanning.setPadding(20, 0, 0, 0)
-
-
-        if (Build.VERSION.SDK_INT < 23) {
-
-            scanning.setTextAppearance(applicationContext, android.R.style.TextAppearance_Medium)
-            scanning.text = junk!!.getString("junk")!! + getString(R.string.MB_of_junk_files_are_cleared)
-
-        } else {
-
-            scanning.setTextAppearance(android.R.style.TextAppearance_Medium)
-            scanning.text = junk!!.getString("junk")!! + getString(R.string.MB_of_junk_files_are_cleared)
-        }
-
-
-        val anim = AnimatorInflater.loadAnimator(applicationContext, R.animator.flipping) as ObjectAnimator
+        val anim =
+            AnimatorInflater.loadAnimator(applicationContext, R.animator.flipping) as ObjectAnimator
         anim.target = front
         anim.duration = 3000
         anim.start()
@@ -104,49 +72,41 @@ class Scanning_Junk : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate
         anim.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
 
-                scanning.text = getString(R.string.cleared) + junk!!.getString("junk") + getString(R.string.MB)
-                scanning.setTextColor(Color.parseColor("#FFFFFF"))
             }
 
             override fun onAnimationEnd(animation: Animator) {
-                rippleBackground.stopRippleAnimation()
                 if (adsShow) {
-
                     adManager!!.completed()
                 } else {
                     val handler7 = Handler()
                     handler7.postDelayed({
-                        //                add("Closes System Services like Bluetooth,Screen Rotation,Sync etc.", 6);
-                        //                add("Closes System Services like Bluetooth,Screen Rotation,Sync etc.", 6);
                         val intent = Intent(this@Scanning_Junk, MainActivity::class.java)
                         intent.putExtra("frag", 3)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     }, 1000)
-
                 }
-
             }
 
             override fun onAnimationCancel(animation: Animator) {
-
             }
 
             override fun onAnimationRepeat(animation: Animator) {
 
             }
         })
-
         files.text = ""
     }
 
     private fun startMainAnimation() {
-//        mAdView = findViewById(R.id.adView)
-//        val adRequest = AdRequest.Builder().build()
-//        mAdView!!.loadAd(adRequest)
+        /*mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder()
+            .build()
+        mAdView!!.loadAd(adRequest)*/
         apps = ArrayList()
 
-        val rotate = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        val rotate =
+            RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         rotate.duration = 1500
         rotate.repeatCount = 4
         rotate.interpolator = LinearInterpolator()
@@ -159,12 +119,6 @@ class Scanning_Junk : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate
             override fun onAnimationEnd(animation: Animation) {
                 T2.cancel()
                 T2.purge()
-                scan1.hide()
-                scan2.hide()
-                scan3.hide()
-                scan4.hide()
-                scan5.hide()
-                scan6.hide()
                 handler!!.sendEmptyMessage(END_ANIMATION)
             }
 
@@ -197,6 +151,9 @@ class Scanning_Junk : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate
         super.onCreate(savedInstanceState)
         junk = intent.extras
         setContentView(R.layout.scanning_junk)
+        abnb_del.setAnimation("cpu_child.json")
+        abnb_del.loop(true)
+        abnb_del.playAnimation()
         handler = object : Handler() {
             override fun handleMessage(msg: Message) {
                 super.handleMessage(msg)
@@ -220,69 +177,11 @@ class Scanning_Junk : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate
         } else {
             startMainAnimation()
         }
-        /*recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
-
-        recycler_view.setItemAnimator(new SlideInLeftAnimator());
-        recycler_view.addItemDecoration(new SimpleDividerItemDecoration(this));
-        mAdapter = new Junk_Apps_Adapter(apps);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        recycler_view.setLayoutManager(mLayoutManager);
-        recycler_view.setItemAnimator(new SlideInUpAnimator(new OvershootInterpolator(1f)));
-        recycler_view.computeHorizontalScrollExtent();
-        recycler_view.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        recycler_view.addItemDecoration(new SimpleDividerItemDecoration(this));*/
     }
 
 
     internal fun startAnim(i1: Int) {
-        if (i1 == 1) {
-            scan1.show()
-            scan3.show()
-            scan5.show()
 
-            scan2.hide()
-            scan4.hide()
-            scan6.hide()
-        } else if (i1 == 2) {
-            scan2.show()
-            scan4.show()
-            scan6.show()
-
-            scan1.hide()
-            scan3.hide()
-            scan5.hide()
-        } else if (i1 == 3) {
-            scan2.show()
-            scan4.show()
-            scan6.show()
-
-            scan1.show()
-            scan3.show()
-            scan5.show()
-        } else if (i1 == 4) {
-            scan2.show()
-            scan3.show()
-            scan5.show()
-
-            scan1.show()
-            scan2.show()
-            scan6.show()
-        }
-
-
-        // or avi.smoothToShow();
-    }
-
-    internal fun stopAnim() {
-        scan1.hide()
-        scan3.hide()
-        scan5.hide()
-
-        scan2.show()
-        scan4.show()
-        scan6.show()
-        // or avi.smoothToHide();
     }
 
 

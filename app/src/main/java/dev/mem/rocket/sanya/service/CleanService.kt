@@ -41,7 +41,7 @@ class CleanService : AccessibilityService() {
         info.notificationTimeout = 100
         this.serviceInfo = info
         val intent = Intent()
-        intent.setClassName("pro.magic.cleaner.boost", "pro.magic.cleaner.boost.MainActivity")
+        intent.setClassName("dev.mem.rocket.sanya", "dev.mem.rocket.sanya.MainActivity")
         intent.putExtra("fromService", true)
         intent.action = Intent.ACTION_MAIN
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or
@@ -82,7 +82,7 @@ class CleanService : AccessibilityService() {
             scroldown = false
             val intent = Intent()
             intent.putExtra("junk", junk)
-            intent.setClassName("pro.magic.cleaner.boost", "pro.magic.cleaner.boost.Scanning_Junk")
+            intent.setClassName("dev.mem.rocket.sanya", "dev.mem.rocket.sanya.Scanning_Junk")
             intent.action = Intent.ACTION_MAIN
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or
                     Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_NO_HISTORY)
@@ -146,7 +146,7 @@ class CleanService : AccessibilityService() {
         handleReturnToHome!!.removeCallbacks(returnToHome)
         val intent = Intent()
         intent.putExtra("junk", junk)
-        intent.setClassName("pro.magic.cleaner.boost", "pro.magic.cleaner.boost.Scanning_Junk")
+        intent.setClassName("dev.mem.rocket.sanya", "dev.mem.rocket.sanya.Scanning_Junk")
         intent.action = Intent.ACTION_MAIN
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or
                 Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_NO_HISTORY)

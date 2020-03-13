@@ -50,24 +50,29 @@ class JunkCleanerFrag : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Alarm_Junk.getNeedToCheck().observe(this, Observer {
-            if (it) {
-                checkText()
-            }
-        })
-
+        abnb_alert_ripple.setAnimation("good_ripple.json")
+        abnb_alert_ripple.loop(true)
+        abnb_alert_ripple.playAnimation()
+        Alarm_Junk.getNeedToCheck()
+            .observe(this, Observer {
+                if (it) {
+                    checkText()
+                }
+            })
         try {
-
             mainbutton.setOnClickListener {
-                //TODO: dont call for android.Version > Nougat
                 if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1 || checkServiceAccess()) {
                     if (PreferencesProvider.getInstance().getString("junk", "1") == "1") {
 
                         val intent = Intent(activity, Alarm_Junk::class.java)
-                        val pendingIntent = PendingIntent.getBroadcast(activity, 0,
-                                intent, PendingIntent.FLAG_ONE_SHOT)
+                        val pendingIntent = PendingIntent.getBroadcast(
+                            activity, 0,
+                            intent, PendingIntent.FLAG_ONE_SHOT
+                        )
                         val alarmManager = activity!!.getSystemService(ALARM_SERVICE) as AlarmManager
-                        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 600 * 1000, pendingIntent)
+                        alarmManager.set(
+                            AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 600 * 1000, pendingIntent
+                        )
 
                         val i = Intent(activity, Scanning_Junk::class.java)
                         i.putExtra("junk", alljunk.toString() + "")
@@ -75,16 +80,12 @@ class JunkCleanerFrag : Fragment() {
 
                         val handler = Handler()
                         handler.postDelayed({
-                            //Do something after 100ms
-
-
                             mainbrush.setImageResource(R.drawable.junk_blue)
                             mainbutton.setText(R.string.cleaned)
                             cache.setText(R.string.cache_memory) //2
                             temp.setText(R.string.temporary_files)
                             residue.setText(R.string.residual_files)
                             system.setText(R.string.system_junk)
-
 
                             maintext.setText(R.string.crystal_clear)
                             maintext.setTextColor(Color.parseColor("#24D149"))
@@ -101,20 +102,16 @@ class JunkCleanerFrag : Fragment() {
                             systemtext.text = getLiteText()
                             systemtext.setTextColor(Color.parseColor("#24D149"))
 
-
-                            PreferencesProvider.getInstance().edit()
-                                    .putString("junk", "0")
-                                    .apply()
+                            PreferencesProvider.getInstance()
+                                .edit()
+                                .putString("junk", "0")
+                                .apply()
                         }, 2000)
                     } else {
-                        //                        Toast.makeText(getActivity(), "No Junk Files ALready Cleaned.", Toast.LENGTH_LONG).show();
-
                         @SuppressLint("RestrictedApi") val inflater = getLayoutInflater(arguments)
                         val layout = inflater.inflate(R.layout.my_toast, null)
-
                         val text = layout.findViewById<View>(R.id.textView1) as TextView
                         text.setText(R.string.no_junk_files_already_cleaned)
-
                         val toast = Toast(activity)
                         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 70)
                         toast.duration = Toast.LENGTH_LONG
@@ -123,37 +120,6 @@ class JunkCleanerFrag : Fragment() {
                     }
                 }
             }
-
-
-            //            Random ran1 = new Random();
-            //            final int proc1 = ran1.nextInt(20) + 5;
-            //
-            //            Random ran2 = new Random();
-            //            final int proc2 = ran2.nextInt(15) + 10;
-            //
-            //            Random ran3 = new Random();
-            //            final int proc3 = ran3.nextInt(30) + 15;
-            //
-            //            Random ran4 = new Random();
-            //            final int proc4 = ran4.nextInt(25) + 10;
-            //
-            //            alljunk=proc1+proc2+proc3+proc4;
-            //
-            //            maintext.setText(alljunk+" MB");
-            //            maintext.setTextColor(Color.parseColor("#F22938"));
-            //
-            //            cachetext.setText(proc1+" MB");
-            //            cachetext.setTextColor(Color.parseColor("#F22938"));
-            //
-            //            temptext.setText(proc2+" MB");
-            //            temptext.setTextColor(Color.parseColor("#F22938"));
-            //
-            //            residuetext.setText(proc3+" MB");
-            //            residuetext.setTextColor(Color.parseColor("#F22938"));
-            //
-            //            systemtext.setText(proc4+" MB");
-            //            systemtext.setTextColor(Color.parseColor("#F22938"));
-
         } catch (e: Exception) {
 
         }
@@ -163,7 +129,11 @@ class JunkCleanerFrag : Fragment() {
 
     private fun checkText() {
         if (PreferencesProvider.getInstance().getString("junk", "1") == "1") {
-            mainbrush.setImageResource(R.drawable.junk_red)
+
+
+            abnb_alert_ripple.setAnimation("alert_ripple.json")
+            abnb_alert_ripple.loop(true)
+            abnb_alert_ripple.playAnimation()
             mainbutton.setText(R.string.clean)
             cache.setText(R.string.cache_memory)
             temp.setText(R.string.temporary_files)
@@ -200,7 +170,6 @@ class JunkCleanerFrag : Fragment() {
             systemtext.setTextColor(Color.parseColor("#F22938"))
 
         } else {
-            mainbrush.setImageResource(R.drawable.junk_blue)
             mainbutton.setText(R.string.cleaned)
             cache.setText(R.string.cache_memory) //2
             temp.setText(R.string.temporary_files)
