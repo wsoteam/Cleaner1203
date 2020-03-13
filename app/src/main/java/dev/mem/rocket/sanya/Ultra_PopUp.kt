@@ -6,6 +6,7 @@ import android.os.Bundle
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.animation.OvershootInterpolator
+import com.google.android.gms.ads.AdRequest
 
 import dev.mem.rocket.sanya.AAA.Applying_Ultra
 import dev.mem.rocket.sanya.OOP.PowersClass
@@ -35,20 +36,20 @@ class Ultra_PopUp : Activity() {
         val b = intent.extras
         setContentView(R.layout.ultra_popup)
 
-//        mAdView = findViewById(R.id.adView)
-//        val adRequest = AdRequest.Builder().build()
-//        mAdView!!.loadAd(adRequest)
+        /*mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView!!.loadAd(adRequest)*/
 
-
+        abnb_extreme.setAnimation("13539-sign-for-error-or-explanation-alert.json")
+        abnb_extreme.loop(true)
+        abnb_extreme.playAnimation()
         try {
-
             hour = Integer.parseInt(b!!.getString("hour")!!.replace("[^0-9]".toRegex(), "")) - Integer.parseInt(b!!.getString("hournormal")!!.replace("[^0-9]".toRegex(), ""))
             min = Integer.parseInt(b!!.getString("minutes")!!.replace("[^0-9]".toRegex(), "")) - Integer.parseInt(b!!.getString("minutesnormal")!!.replace("[^0-9]".toRegex(), ""))
         } catch (e: Exception) {
             hour = 4
             min = 7
         }
-
         if (hour == 0 && min == 0) {
             hour = 4
             min = 7
@@ -60,60 +61,8 @@ class Ultra_PopUp : Activity() {
         applied.setOnClickListener {
             val i = Intent(this@Ultra_PopUp, Applying_Ultra::class.java)
             startActivity(i)
-            //                if (Build.VERSION.SDK_INT >= 21) {
-            //                    getWindow().setNavigationBarColor(Color.parseColor("#000000"));
-            //                    getWindow().setStatusBarColor(Color.parseColor("#000000"));
-            //                }
-
             finish()
         }
-
-        items = ArrayList()
-
-        recycler_view.itemAnimator = SlideInLeftAnimator()
-        //                RecyclerView recycler_view = (RecyclerView) findViewById(R.id.list);
-        //                recycler_view.setItemAnimator(new SlideInUpAnimator(new OvershootInterpolator(1f)));
-
-        recycler_view.itemAnimator!!.addDuration = 200
-
-        mAdapter = PowerAdapter(items)
-        val mLayoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
-        recycler_view.layoutManager = mLayoutManager
-        recycler_view.itemAnimator = SlideInUpAnimator(OvershootInterpolator(1f))
-        recycler_view.computeHorizontalScrollExtent()
-        recycler_view.adapter = mAdapter
-        mAdapter.notifyDataSetChanged()
-
-        /*
-
-        final Handler handler5 = new Handler();
-        handler5.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                add("Block Acess to Memory and Battery Draning ApplicationsClass", 4);
-
-            }
-        }, 5000);
-
-        final Handler handler6 = new Handler();
-        handler6.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                add("Closes System Services like Bluetooth,Screen Rotation,Sync etc.", 5);
-
-            }
-        }, 6000);\
-        */
-
-        //        final Handler handler6 = new Handler();
-        //        handler4.postDelayed(new Runnable() {
-        //            @Override
-        //            public void run() {
-        //                add("Use Black and White Scheme To Avoid Battery Draning", 3);
-        //            }
-        //        }, 4000);
-
-
     }
 
     fun add(text: String, position: Int) {
@@ -123,15 +72,6 @@ class Ultra_PopUp : Activity() {
         mAdapter.notifyItemInserted(position)
 
     }
-
-    //    if(position==4)
-    //    {
-    //        mAdapter.notifyItemMoved(4,0);
-    //    }
-    //    else  if(position==5)
-    //    {
-    //        mAdapter.notifyItemMoved(5,0);
-    //    }
 
     override fun onBackPressed() {
         // super.onBackPressed();

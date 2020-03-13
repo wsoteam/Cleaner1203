@@ -19,4 +19,5 @@
     <color name="main_color">#7a67a7</color>
     <color name="green_color_active">#00ca71</color>
     <color name="green_color_inactive">#7065CCA2</color>
+    <color name="extreme_text">#ff7c80</color>
 </resources>
