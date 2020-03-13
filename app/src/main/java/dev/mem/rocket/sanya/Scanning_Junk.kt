@@ -150,13 +150,14 @@ class Scanning_Junk : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.scanning_junk)
+
         val adRequest = AdRequest.Builder().build()
         if(!SubscriptionProvider.hasSubscription()) {
             adView!!.loadAd(adRequest)
         }
 
         junk = intent.extras
-        setContentView(R.layout.scanning_junk)
         abnb_del.setAnimation("cpu_child.json")
         abnb_del.loop(true)
         abnb_del.playAnimation()
