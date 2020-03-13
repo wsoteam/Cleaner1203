@@ -36,6 +36,7 @@ import java.util.TimerTask
 import dev.mem.rocket.sanya.service.CleanService
 
 import dev.mem.rocket.sanya.Constants.adsShow
+import kotlinx.android.synthetic.main.banner_layout.adView
 import kotlinx.android.synthetic.main.scanning_junk.*
 
 class Scanning_Junk : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate {
@@ -149,6 +150,11 @@ class Scanning_Junk : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val adRequest = AdRequest.Builder().build()
+        if(!SubscriptionProvider.hasSubscription()) {
+            adView!!.loadAd(adRequest)
+        }
+
         junk = intent.extras
         setContentView(R.layout.scanning_junk)
         abnb_del.setAnimation("cpu_child.json")

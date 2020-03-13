@@ -26,7 +26,9 @@ import dev.mem.rocket.sanya.R
 
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
+import dev.mem.rocket.sanya.SubscriptionProvider
 import kotlinx.android.synthetic.main.applying_ultra.*
+import kotlinx.android.synthetic.main.banner_layout.adView
 import kotlinx.android.synthetic.main.phone_booster.dynamicArcView2
 import kotlinx.android.synthetic.main.powersaving_completion.abnb_1
 import kotlinx.android.synthetic.main.powersaving_completion.abnb_2
@@ -49,10 +51,10 @@ class Applying_Ultra : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.applying_ultra)
 
-        /*mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder()
-            .build()
-        mAdView!!.loadAd(adRequest)*/
+        val adRequest = AdRequest.Builder().build()
+        if(!SubscriptionProvider.hasSubscription()) {
+            adView!!.loadAd(adRequest)
+        }
 
         setAnim()
 

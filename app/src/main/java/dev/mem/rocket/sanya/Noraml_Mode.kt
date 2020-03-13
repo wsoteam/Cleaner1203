@@ -26,6 +26,7 @@ import dev.mem.rocket.sanya.PPP.PowerSaving_Complition
 import dev.mem.rocket.sanya.Constants.adsBatterySaver
 import dev.mem.rocket.sanya.Constants.adsShow
 import dev.mem.rocket.sanya.utils.PreferencesProvider
+import kotlinx.android.synthetic.main.banner_layout.adView
 import kotlinx.android.synthetic.main.revert_to_normal.*
 
 /**
@@ -51,7 +52,10 @@ class Noraml_Mode : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.revert_to_normal)
-
+        val adRequest = AdRequest.Builder().build()
+        if(!SubscriptionProvider.hasSubscription()) {
+            adView!!.loadAd(adRequest)
+        }
         if (adsBatterySaver && adsShow) {
         }
         adsBatterySaver = !adsBatterySaver

@@ -27,6 +27,8 @@ import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
 
 import dev.mem.rocket.sanya.Constants.adsShow
+import dev.mem.rocket.sanya.SubscriptionProvider
+import kotlinx.android.synthetic.main.banner_layout.adView
 import kotlinx.android.synthetic.main.phone_booster.dynamicArcView2
 import kotlinx.android.synthetic.main.powersaving_completion.*
 
@@ -56,10 +58,10 @@ class PowerSaving_Complition : Activity(), AdMobFullscreenManager.AdMobFullscree
         super.onCreate(savedInstanceState)
         setContentView(R.layout.powersaving_completion)
 
-        /*mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder()
-            .build()
-        mAdView!!.loadAd(adRequest)*/
+        val adRequest = AdRequest.Builder().build()
+        if(!SubscriptionProvider.hasSubscription()) {
+            adView!!.loadAd(adRequest)
+        }
 
         dynamicArcView2.addSeries(SeriesItem.Builder(Color.argb(255, 218, 218, 218))
             .setRange(0f, 100f, 0f)

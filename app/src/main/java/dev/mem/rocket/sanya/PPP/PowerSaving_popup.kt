@@ -14,9 +14,11 @@ import dev.mem.rocket.sanya.OOP.PowersClass
 import java.util.ArrayList
 
 import dev.mem.rocket.sanya.R
+import dev.mem.rocket.sanya.SubscriptionProvider
 import dev.mem.rocket.sanya.utils.PreferencesProvider
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import kotlinx.android.synthetic.main.banner_layout.adView
 import kotlinx.android.synthetic.main.powersaving_popup.*
 
 /**
@@ -33,9 +35,10 @@ class PowerSaving_popup : Activity() {
         val b = intent.extras
         setContentView(R.layout.powersaving_popup)
 
-        /*mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
-        mAdView!!.loadAd(adRequest)*/
+        if(!SubscriptionProvider.hasSubscription()) {
+            adView!!.loadAd(adRequest)
+        }
 
 
         items = ArrayList()

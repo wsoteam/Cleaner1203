@@ -17,6 +17,7 @@ import java.util.ArrayList
 import dev.mem.rocket.sanya.PPP.PowerAdapter
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import kotlinx.android.synthetic.main.banner_layout.adView
 import kotlinx.android.synthetic.main.ultra_popup.*
 
 /**
@@ -36,9 +37,10 @@ class Ultra_PopUp : Activity() {
         val b = intent.extras
         setContentView(R.layout.ultra_popup)
 
-        /*mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
-        mAdView!!.loadAd(adRequest)*/
+        if(!SubscriptionProvider.hasSubscription()) {
+            adView!!.loadAd(adRequest)
+        }
 
         abnb_extreme.setAnimation("13539-sign-for-error-or-explanation-alert.json")
         abnb_extreme.loop(true)

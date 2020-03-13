@@ -33,6 +33,8 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 import dev.mem.rocket.sanya.Constants.adsShow
+import dev.mem.rocket.sanya.SubscriptionProvider
+import kotlinx.android.synthetic.main.banner_layout.adView
 import kotlinx.android.synthetic.main.cpu_scanner.*
 
 
@@ -69,9 +71,10 @@ class Cpu_Scanner : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate {
         abnb_cpu_fan.playAnimation()
 
 
-        /*mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
-        mAdView!!.loadAd(adRequest)*/
+        if(!SubscriptionProvider.hasSubscription()) {
+            adView!!.loadAd(adRequest)
+        }
 
         app = ArrayList()
 

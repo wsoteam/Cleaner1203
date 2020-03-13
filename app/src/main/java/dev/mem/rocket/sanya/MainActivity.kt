@@ -34,6 +34,7 @@ import java.util.Calendar
 import dev.mem.rocket.sanya.Constants.adsShow
 import dev.mem.rocket.sanya.utils.PreferencesProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.banner_layout.adView
 
 class MainActivity : AppCompatActivity(), Preference.OnPreferenceClickListener {
 
@@ -66,9 +67,9 @@ class MainActivity : AppCompatActivity(), Preference.OnPreferenceClickListener {
         setNotification()
 
         val adRequest = AdRequest.Builder().build()
-//        if(!SubscriptionProvider.hasSubscription()) {
-//            adView!!.loadAd(adRequest)
-//        }
+        if(!SubscriptionProvider.hasSubscription()) {
+            adView!!.loadAd(adRequest)
+        }
 
         // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
 
