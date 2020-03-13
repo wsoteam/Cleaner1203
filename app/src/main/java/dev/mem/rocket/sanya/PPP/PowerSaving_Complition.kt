@@ -16,7 +16,9 @@ import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.util.Log
+import android.view.animation.AccelerateInterpolator
 import android.widget.Toast
+import com.google.android.gms.ads.AdRequest
 
 import dev.mem.rocket.sanya.AdMobFullscreenManager
 import dev.mem.rocket.sanya.R
@@ -25,6 +27,7 @@ import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
 
 import dev.mem.rocket.sanya.Constants.adsShow
+import kotlinx.android.synthetic.main.phone_booster.dynamicArcView2
 import kotlinx.android.synthetic.main.powersaving_completion.*
 
 /**
@@ -53,111 +56,87 @@ class PowerSaving_Complition : Activity(), AdMobFullscreenManager.AdMobFullscree
         super.onCreate(savedInstanceState)
         setContentView(R.layout.powersaving_completion)
 
-//        mAdView = findViewById(R.id.adView)
-//        val adRequest = AdRequest.Builder().build()
-//        mAdView!!.loadAd(adRequest)
+        /*mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder()
+            .build()
+        mAdView!!.loadAd(adRequest)*/
 
+        dynamicArcView2.addSeries(SeriesItem.Builder(Color.argb(255, 218, 218, 218))
+            .setRange(0f, 100f, 0f)
+            .setInterpolator(AccelerateInterpolator())
+            .build())
 
+        dynamicArcView2.addSeries(SeriesItem.Builder(Color.parseColor("#00ca71"))
+            .setRange(0f, 100f, 100f)
+            .setInitialVisibility(false)
+            .setLineWidth(32f)
+            .build())
 
+        val seriesItem2 = SeriesItem.Builder(Color.parseColor("#00ca71"))
+            .setRange(0f, 100f, 0f)
+            .setLineWidth(32f)
+            .build()
 
-
-        //        dynamicArcView2.addSeries(new SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-        //                .setRange(0, 100, 0)
-        //                .setInterpolator(new AccelerateInterpolator())
-        //                .build());
-
-        dynamicArcView2.addSeries(SeriesItem.Builder(Color.parseColor("#27282D"))
-                .setRange(0f, 100f, 100f)
-                .setInitialVisibility(false)
-                .setLineWidth(12f)
-                .build())
-
-        //Create data series track
-        val seriesItem1 = SeriesItem.Builder(Color.parseColor("#27282D"))
-                .setRange(0f, 100f, 0f)
-                .setLineWidth(10f)
-                .build()
-
-        val seriesItem2 = SeriesItem.Builder(Color.parseColor("#FFFFFF"))
-                .setRange(0f, 100f, 0f)
-                .setLineWidth(10f)
-                .build()
-        //
-        //        int series1Index = dynamicArcView2.addSeries(seriesItem1);
         val series1Index2 = dynamicArcView2.addSeries(seriesItem2)
 
+        setAnim()
+
         seriesItem2.addArcSeriesItemListener(object : SeriesItem.SeriesItemListener {
-            override fun onSeriesItemAnimationProgress(v: Float, v1: Float) {
-
-
+            override fun onSeriesItemAnimationProgress(
+                v: Float,
+                v1: Float
+            ) {
                 val i = v1.toInt()
                 completion.text = "$i%"
 
-                if (v1 >= 10 && v1 < 50) {
-                    ist.setTextColor(Color.parseColor("#FFFFFF"))
-                    istpic.setImageResource(R.drawable.circle_white)
-
-                } else if (v1 >= 50 && v1 < 75) {
-                    sec.setTextColor(Color.parseColor("#FFFFFF"))
-                    secpic.setImageResource(R.drawable.circle_white)
-                } else if (v1 >= 75 && v1 < 90) {
-                    thi.setTextColor(Color.parseColor("#FFFFFF"))
-                    thipic.setImageResource(R.drawable.circle_white)
+                if (v1 >= 1 && v1 <= 5) {
+                    abnb_1.playAnimation()
+                } else if (v1 >= 10 && v1 < 40) {
+                    ist.setTextColor(Color.parseColor("#00ca71"))
+                } else if (v1 >= 40 && v1 < 50) {
+                    abnb_2.playAnimation()
+                } else if (v1 >= 50 && v1 < 65) {
+                    sec.setTextColor(Color.parseColor("#00ca71"))
+                } else if (v1 >= 65 && v1 < 75) {
+                    abnb_3.playAnimation()
+                } else if (v1 >= 75 && v1 < 85) {
+                    thi.setTextColor(Color.parseColor("#00ca71"))
+                } else if (v1 >= 85 && v1 < 90) {
+                    abnb_4.playAnimation()
                 } else if (v1 >= 90 && v1 <= 100) {
-                    fou.setTextColor(Color.parseColor("#FFFFFF"))
-                    foupic.setImageResource(R.drawable.circle_white)
-
-
+                    fou.setTextColor(Color.parseColor("#00ca71"))
                 }
-
-
             }
 
             override fun onSeriesItemDisplayProgress(v: Float) {
-
             }
         })
 
+        dynamicArcView2.addEvent(
+            DecoEvent.Builder(100f).setIndex(series1Index2).setDelay(1000).setListener(object :
+                DecoEvent.ExecuteEventListener {
+                override fun onEventStart(decoEvent: DecoEvent) {
 
-        dynamicArcView2.addEvent(DecoEvent.Builder(DecoEvent.EventType.EVENT_SHOW, true)
-                .setDelay(0)
-                .setDuration(0)
-                .setListener(object : DecoEvent.ExecuteEventListener {
-                    override fun onEventStart(decoEvent: DecoEvent) {
-                        //                        bottom.setText("");
-                        //                        top.setText("");
-                        //                        centree.setText("Optimizing...");
-
-                    }
-
-                    override fun onEventEnd(decoEvent: DecoEvent) {
-
-                    }
-
-                })
-                .build())
-
-        dynamicArcView2.addEvent(DecoEvent.Builder(100f).setIndex(series1Index2).setDelay(1000).setListener(object : DecoEvent.ExecuteEventListener {
-            override fun onEventStart(decoEvent: DecoEvent) {
-                //                bottom.setText("");
-                //                top.setText("");
-                //                centree.setText("Optimizing...");
-            }
-
-            override fun onEventEnd(decoEvent: DecoEvent) {
-                //                bottom.setText("Found");
-                //                top.setText("Storage");
-                //                Random ran3 = new Random();
-                //                ramperct.setText(ran3.nextInt(40) + 20+"%");
-                if (adsShow) {
-                    adManager!!.completed()
-                } else {
-                    youDesirePermissionCode(this@PowerSaving_Complition)
-                    closesall()
-                    check = 1
                 }
-            }
-        }).build())
+
+                override fun onEventEnd(decoEvent: DecoEvent) {
+                    if (adsShow) {
+                        adManager!!.completed()
+                    } else {
+                        youDesirePermissionCode(this@PowerSaving_Complition)
+                        closesall()
+                        check = 1
+                    }
+                }
+            }).build()
+        )
+    }
+
+    private fun setAnim() {
+        abnb_1.setAnimation("433-checked-done.json")
+        abnb_2.setAnimation("433-checked-done.json")
+        abnb_3.setAnimation("433-checked-done.json")
+        abnb_4.setAnimation("433-checked-done.json")
     }
 
     fun closesall() {

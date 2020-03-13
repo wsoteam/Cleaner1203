@@ -17,5 +17,6 @@
     <color name="main_color_accent">#f98300</color>
     <color name="btn">#0EAC4A</color>
     <color name="main_color">#7a67a7</color>
-
+    <color name="green_color_active">#00ca71</color>
+    <color name="green_color_inactive">#7065CCA2</color>
 </resources>
