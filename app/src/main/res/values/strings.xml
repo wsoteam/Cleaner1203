@@ -11,7 +11,7 @@
     <string name="serviceDescription" translatable="false">This service clean your app cache. We don`t use your private information.</string>
 
 
-    <string name="app_name" translatable="false">Magic cleaner PRO</string>
+    <string name="app_name" translatable="false">Phone Booster</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="facebook_app_id" translatable="false">2925161510862306</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb2925161510862306</string>
