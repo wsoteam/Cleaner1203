@@ -1,6 +1,7 @@
 package dev.mem.rocket.sanya
 
 import android.Manifest
+import android.animation.Animator
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentResolver
@@ -14,6 +15,8 @@ import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.util.Log
+import android.view.View
+import com.google.android.gms.ads.AdRequest
 
 import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
@@ -49,155 +52,41 @@ class Noraml_Mode : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.revert_to_normal)
 
-//        mAdView = findViewById(R.id.adView)
-//        val adRequest = AdRequest.Builder().build()
-//        mAdView!!.loadAd(adRequest)
-
-        ///// Call to Intersticial load
-
         if (adsBatterySaver && adsShow) {
         }
         adsBatterySaver = !adsBatterySaver
 
-
-        //// DEcoView Library For Progress Completion a circle Drrawn using this library
-
-
-        //        dynamicArcView2.addSeries(new SeriesItem.Builder(Color.argb(255, 218, 218, 218))
-        //                .setRange(0, 100, 0)
-        //                .setInterpolator(new AccelerateInterpolator())
-        //                .build());
-
-        dynamicArcView2.addSeries(SeriesItem.Builder(Color.parseColor("#27282D"))
-                .setRange(0f, 100f, 100f)
-                .setInitialVisibility(false)
-                .setLineWidth(12f)
-                .build())
-
-        //Create data series track
-        val seriesItem1 = SeriesItem.Builder(Color.parseColor("#27282D"))
-                .setRange(0f, 100f, 0f)
-                .setLineWidth(10f)
-                .build()
-
-        val seriesItem2 = SeriesItem.Builder(Color.parseColor("#FFFFFF"))
-                .setRange(0f, 100f, 0f)
-                .setLineWidth(10f)
-                .build()
-        //
-        //        int series1Index = dynamicArcView2.addSeries(seriesItem1);
-        val series1Index2 = dynamicArcView2.addSeries(seriesItem2)
-
-        seriesItem2.addArcSeriesItemListener(object : SeriesItem.SeriesItemListener {
-            override fun onSeriesItemAnimationProgress(v: Float, v1: Float) {
-
-
-                val i = v1.toInt()
-                completion.text = "$i%"
-
-                if (v1 >= 10 && v1 < 50) {
-
-                    //                    final InterstitialAd mInterstitialAd = new InterstitialAd(getApplicationContext());
-                    //                    mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial));
-                    //                    AdRequest adRequestInter = new AdRequest.Builder().build();
-                    //                    mInterstitialAd.setAdListener(new AdListener() {
-                    //                        @Override
-                    //                        public void onAdLoaded() {
-                    //                            mInterstitialAd.show();
-                    //                        }
-                    //                    });
-                    //                    mInterstitialAd.loadAd(adRequestInter);
-
-                } else if (v1 >= 50 && v1 < 75) {
-
-                } else if (v1 >= 75 && v1 < 90) {
-
-                } else if (v1 >= 90 && v1 <= 100) {
-
-                }
-
-
+        abnb_low_charge.setAnimation("low_charge.json")
+        abnb_low_charge.playAnimation()
+        abnb_low_charge.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
             }
 
-            override fun onSeriesItemDisplayProgress(v: Float) {
-
-            }
-        })
-
-
-        dynamicArcView2.addEvent(DecoEvent.Builder(DecoEvent.EventType.EVENT_SHOW, true)
-                .setDelay(0)
-                .setDuration(0)
-                .setListener(object : DecoEvent.ExecuteEventListener {
-                    override fun onEventStart(decoEvent: DecoEvent) {
-                        //                        bottom.setText("");
-                        //                        top.setText("");
-                        //                        centree.setText("Optimizing...");
-
-                    }
-
-                    override fun onEventEnd(decoEvent: DecoEvent) {
-
-                    }
-
-                })
-                .build())
-
-        dynamicArcView2.addEvent(DecoEvent.Builder(100f).setIndex(series1Index2).setDelay(1000).setListener(object : DecoEvent.ExecuteEventListener {
-            override fun onEventStart(decoEvent: DecoEvent) {
-                //                bottom.setText("");
-                //                top.setText("");
-                //                centree.setText("Optimizing...");
+            override fun onAnimationCancel(animation: Animator?) {
             }
 
-            override fun onEventEnd(decoEvent: DecoEvent) {
+            override fun onAnimationStart(animation: Animator?) {
+            }
 
+            override fun onAnimationEnd(animation: Animator?) {
+                tvLoad.visibility = View.VISIBLE
                 if (adsShow) {
                     adManager!!.completed()
                 } else {
                     check = 1
                     youDesirePermissionCode(this@Noraml_Mode)
-                    //                enablesall();
                     PreferencesProvider.getInstance().edit()
-                            .putString("mode", "0")
-                            .apply()
+                        .putString("mode", "0")
+                        .apply()
                 }
-                //                bottom.setText("Found");
-                //                top.setText("Storage");
-                //                Random ran3 = new Random();
-                //                ramperct.setText(ran3.nextInt(40) + 20+"%");
-
-
             }
-        }).build())
+        })
     }
 
     fun enablesall() {
-
-
-        /// activate and release all system services
-
-
-        //        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        //        if (!mBluetoothAdapter.isEnabled()) {
-        //            mBluetoothAdapter.enable();
-        //        }
-
-        //        WifiManager wifiManager = (WifiManager) getApplication().getSystemService(Context.WIFI_SERVICE);
-        //
-        //
-        //        boolean wifiEnabled = wifiManager.isWifiEnabled();
-        //        if(wifiEnabled)
-        //        {
-        //            wifiManager.setWifiEnabled(false);
-        //        }
-
         PowerSaving_Complition.setAutoOrientationEnabled(applicationContext, true)
-
         Settings.System.putInt(this.contentResolver, Settings.System.SCREEN_BRIGHTNESS, 255)
-
         ContentResolver.setMasterSyncAutomatically(true)
-
     }
 
     override fun onBackPressed() {
@@ -206,21 +95,16 @@ class Noraml_Mode : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate {
 
 
     fun youDesirePermissionCode(context: Activity) {
-
-        //// Run time permission for marshmallow users
-
         val permission: Boolean
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             permission = Settings.System.canWrite(context)
         } else {
             permission = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_SETTINGS) == PackageManager.PERMISSION_GRANTED
-            //            Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 30);
-            //            setAutoOrientationEnabled(context, false);
+
         }
         if (permission) {
             //do your code
             enablesall()
-
             finish()
         } else {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -239,12 +123,7 @@ class Noraml_Mode : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && Settings.System.canWrite(this)) {
             Log.d("TAG", "CODE_WRITE_SETTINGS_PERMISSION success")
-
-
-            //            Toast.makeText(getApplicationContext(),"onActivityResult",Toast.LENGTH_LONG).show();
-            //do your code
             enablesall()
-
             finish()
         }
     }
@@ -253,12 +132,7 @@ class Noraml_Mode : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            //do your code
-
-            //            Toast.makeText(getApplicationContext(),"onRequestPermissionsResult",Toast.LENGTH_LONG).show();
-
             enablesall()
-
             finish()
         }
 
