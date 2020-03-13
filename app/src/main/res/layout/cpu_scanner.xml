@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#27282D"
+    android:background="@color/main_color_back"
     android:weightSum="10">
 
     <include
@@ -18,13 +18,19 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_5sdp">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/abnb_cpu_fan"/>
 
-    <ImageView
-        android:id="@+id/cpu"
-        android:src="@drawable/cpu"
-        android:padding="@dimen/_30sdp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/cpu"
+            android:src="@drawable/cpu"
+            android:padding="@dimen/_30sdp"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
         <com.skyfishjy.library.RippleBackground
@@ -38,9 +44,10 @@
             app:rb_radius="22dp"
             app:rb_rippleAmount="4"
             app:rb_duration="3000"
+            android:visibility="gone"
             app:rb_scale="6">
             <ImageView
-
+                android:visibility="gone"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="@dimen/_90sdp"
                 android:layout_centerInParent="true"
@@ -50,7 +57,7 @@
         </com.skyfishjy.library.RippleBackground>
 
         <ImageView
-
+            android:visibility="gone"
             android:padding="@dimen/_30sdp"
             android:id="@+id/scann"
             android:src="@drawable/scanner"
@@ -67,7 +74,7 @@
         android:layout_height="0dp">
         <TextView
             android:id="@+id/cpucooler"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/btn_white"
             android:textAppearance="?android:textAppearanceLarge"
             android:text="@string/cooling_cpu"
             android:gravity="center"
@@ -84,9 +91,9 @@
         >
 
         <!--<ImageView-->
-            <!--android:src="@drawable/back_cpu_sca"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" />-->
+        <!--android:src="@drawable/back_cpu_sca"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_centerInParent="true"
@@ -96,8 +103,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <ImageView
-            android:layout_marginLeft="-700dp"
+            android:layout_marginLeft="700dp"
             android:id="@+id/heart"
+            android:visibility="invisible"
             android:src="@drawable/heartbeat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

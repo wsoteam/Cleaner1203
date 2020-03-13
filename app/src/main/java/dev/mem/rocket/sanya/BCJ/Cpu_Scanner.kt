@@ -17,6 +17,7 @@ import android.view.animation.LinearInterpolator
 import android.view.animation.OvershootInterpolator
 import android.view.animation.RotateAnimation
 import android.view.animation.TranslateAnimation
+import com.google.android.gms.ads.AdRequest
 
 import dev.mem.rocket.sanya.AdMobFullscreenManager
 import dev.mem.rocket.sanya.OOP.ApplicationsClass
@@ -62,10 +63,15 @@ class Cpu_Scanner : Activity(), AdMobFullscreenManager.AdMobFullscreenDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cpu_scanner)
+        abnb_cpu_fan.loop(false)
+        abnb_cpu_fan.speed = 0.55f
+        abnb_cpu_fan.setAnimation("cooler_child.json")
+        abnb_cpu_fan.playAnimation()
 
-//        mAdView = findViewById(R.id.adView)
-//        val adRequest = AdRequest.Builder().build()
-//        mAdView!!.loadAd(adRequest)
+
+        /*mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView!!.loadAd(adRequest)*/
 
         app = ArrayList()
 
