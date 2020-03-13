@@ -73,6 +73,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.0'
 
     implementation "com.android.billingclient:billing:2.0.1"
+    implementation 'com.airbnb.android:lottie:3.3.1'
+
 
 
 }

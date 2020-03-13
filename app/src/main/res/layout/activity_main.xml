@@ -17,11 +17,13 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/main_color_back"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:background="#272A2D"
             android:id="@+id/toolbar"
+            android:backgroundTint="@color/main_color_back"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay"
@@ -57,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?android:attr/windowBackground"
-        android:backgroundTint="#27282d"
+        android:backgroundTint="@color/main_color_back"
         android:theme="@style/Widget.BottomNavigationView"
         app:itemIconTint="@drawable/bnv_main_selector"
         app:itemTextAppearanceActive="@style/AppTheme.BottomItemTextView"

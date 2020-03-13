@@ -3,15 +3,14 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#27282D"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10"
+    android:background="@color/main_color_back">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5.5"
-        android:background="#27282D"
         android:gravity="center">
 
         <RelativeLayout
@@ -25,15 +24,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:src="@drawable/black_circle" />
+                android:src="@drawable/black_circle"
+                android:visibility="invisible"/>
 
             <ImageView
                 android:id="@+id/waves"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="-700dp"
-                android:paddingTop="@dimen/_20sdp"
-                android:src="@drawable/running_bar" />
+                android:paddingTop="@dimen/_20sdp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +45,7 @@
                     android:id="@+id/dynamicArcView2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
+                    android:visibility="invisible"
                     />
 
             </LinearLayout>
@@ -57,8 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/circular_lines" />
+                android:padding="@dimen/_10sdp" />
 
 
             <LinearLayout
@@ -78,7 +76,7 @@
                     android:gravity="center"
                     android:text="@string/storage"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#F22938" />
+                    android:textColor="@color/btn_white" />
 
                 <TextView
                     android:id="@+id/centree"
@@ -86,7 +84,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/btn_white"
                     android:textSize="@dimen/_24sdp" />
 
                 <TextView
@@ -97,7 +95,7 @@
                     android:gravity="center"
                     android:text="@string/found"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#24D149" />
+                    android:textColor="@color/btn_white" />
 
             </LinearLayout>
 
@@ -110,8 +108,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.2"
-        android:background="#27282D">
+        android:layout_weight="1.2">
 
         <LinearLayout
             android:id="@+id/scanlay"
@@ -125,7 +122,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textAppearance="?android:textAppearanceLarge"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/btn_white" />
 
         </LinearLayout>
 
@@ -138,13 +135,19 @@
 
             <Button
                 android:id="@+id/optbutton"
-                android:background="@drawable/shape_button"
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="40dp"
+                android:paddingStart="40dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:text="@string/optimize"
-                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/btn_white"
+                android:background="@drawable/shape_button"
                 />
 
         </LinearLayout>
@@ -161,12 +164,10 @@
         android:weightSum="2">
 
         <LinearLayout
-
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
-            android:background="#27282D"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="@dimen/_1sdp"
@@ -261,7 +262,6 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
             android:layout_weight="2"
-            android:background="#27282D"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="@dimen/_1sdp"
@@ -289,7 +289,7 @@
                     android:gravity="center"
                     android:text="48%"
                     android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/btn_white"
                     android:textSize="@dimen/_22sdp"
                     android:visibility="visible" />
 
@@ -309,7 +309,7 @@
                     android:gravity="center"
                     android:text="@string/ram_usage"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/btn_white"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
@@ -331,7 +331,7 @@
                     android:gravity="right"
                     android:text="1.24 GB/"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/btn_white"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -343,10 +343,12 @@
                     android:gravity="left"
                     android:text="2.67 GB"
                     android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/btn_white"
                     android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
+
+
 
         </LinearLayout>
 
