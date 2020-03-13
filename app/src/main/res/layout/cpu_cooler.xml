@@ -1,122 +1,127 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="6"
-    android:background="#000000"
-    android:gravity="center">
+    android:background="@color/main_color_back"
+    >
 
-    <LinearLayout
-        android:background="#27282D"
-        android:orientation="vertical"
-        android:layout_weight="4.8"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:weightSum="8">
-
-        <RelativeLayout
-            android:layout_weight="5"
-            android:padding="@dimen/_20sdp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-        <ImageView
-            android:id="@+id/tempimg"
-            android:src="@drawable/blue_cooler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/batterytemp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:textStyle="bold"
-            android:textSize="@dimen/_25sdp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:text="23.2"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/showmain"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="top|center"
-            android:text="@string/normal"
-            android:textAllCaps="true"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:textColor="#24D149"
-            android:textSize="@dimen/_25sdp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/coolbutton"
-            android:layout_width="300dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="@dimen/_50sdp"
-
-            android:layout_marginRight="@dimen/_50sdp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="@dimen/_2sdp"
-
-            android:src="@drawable/cool_button_blue"
-            android:text="@string/cool_down"
-            android:textAllCaps="true"
-            android:textSize="30sp" />
-        <TextView
-            android:id="@+id/showsec"
-            android:textColor="#24D149"
-            android:gravity="center"
-            android:text="@string/cpu_temperature_is_good"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-
-    </LinearLayout>
-
-
-
-    <RelativeLayout
-        android:background="#27282D"
-
-        android:layout_marginTop="1dp"
-        android:layout_gravity="center"
+    <ImageView
+        android:id="@+id/tempimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/blue_cooler"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/batterytemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
         android:gravity="center"
-        android:layout_weight="1.2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:foregroundGravity="center"
-            android:id="@+id/recycler_view"
-            android:scrollbars="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        </LinearLayout>
-        <TextView
-            android:id="@+id/nooverheating"
-            android:textColor="#FFFFFF"
-            android:gravity="center"
-            android:text="@string/currently_no_app_causing_overheating"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:text="23.2"
+        android:textColor="@color/btn_white"
+        android:textSize="@dimen/_25sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/showmain"
+        app:layout_constraintStart_toStartOf="@+id/showmain"
+        app:layout_constraintTop_toBottomOf="@+id/showmain"
+        />
 
 
+    <TextView
+        android:id="@+id/showmain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="top|center"
+        android:text="@string/normal"
+        android:textAllCaps="true"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="#24D149"
+        android:textSize="@dimen/_25sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/abnb_back"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="@+id/abnb_back"
+        app:layout_constraintTop_toBottomOf="@+id/abnb_back"
+        />
+    <Button
+        android:id="@+id/coolbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_optimize"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:paddingEnd="40sp"
+        android:paddingStart="40sp"
+        android:paddingTop="16dp"
+        android:text="@string/cool_down"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="@+id/batterytemp"
+        app:layout_constraintStart_toStartOf="@+id/batterytemp"
+        app:layout_constraintTop_toBottomOf="@+id/batterytemp"
+        />
+    <TextView
+        android:id="@+id/showsec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:text="@string/cpu_temperature_is_good"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="#24D149"
+        app:layout_constraintEnd_toEndOf="@+id/batterytemp"
+        app:layout_constraintStart_toStartOf="@+id/batterytemp"
+        app:layout_constraintTop_toBottomOf="@+id/batterytemp"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:foregroundGravity="center"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coolbutton"
+        app:layout_constraintVertical_bias="0.0"
+        />
+    <TextView
+        android:id="@+id/nooverheating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/currently_no_app_causing_overheating"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/btn_white"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view"
+        app:layout_constraintTop_toTopOf="@+id/recycler_view"
+        app:layout_constraintVertical_bias="0.06999999"
+        />
 
-    </RelativeLayout>
 
-</LinearLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/abnb_back"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

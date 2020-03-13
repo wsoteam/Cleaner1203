@@ -53,6 +53,8 @@ class CPUCoolerFrag : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        abnb_back.setAnimation("good_temp.json")
+        abnb_back.loop(true)
         imageResource.observe(this, Observer {
             tempimg.setImageResource(it)
         })
@@ -60,15 +62,12 @@ class CPUCoolerFrag : Fragment() {
 
     internal var batteryReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-
             try {
                 val level = intent.getIntExtra("level", 0)
                 temp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0).toFloat() / 10
-
                 batterytemp.text = "$temp°C"
-
                 if (temp >= 30.0) {
-
+                    abnb_back.setAnimation("bad_temp.json")
                     apps = ArrayList()
                     apps2 = ArrayList()
                     imageResource.postValue(R.drawable.red_cooler)
@@ -76,16 +75,12 @@ class CPUCoolerFrag : Fragment() {
                     showmain.setTextColor(Color.parseColor("#F22938"))
                     showsec.setText(R.string.application_class_problem)
                     nooverheating.text = ""
-
                     coolbutton.setText(R.string.cool_down)
                     coolbutton.setOnClickListener {
-                        //PopUpAds.ShowInterstitialAds(getContext());
                         val i = Intent(activity, Cpu_Scanner::class.java)
                         startActivity(i)
-
                         val handler = Handler()
                         handler.postDelayed({
-                            //                        getActivity().unregisterReceiver(batteryReceiver);
                             nooverheating.setText(R.string.currently_no_app_causing_overheating)
                             showmain.setText(R.string.normal)
                             showmain.setTextColor(Color.parseColor("#24D149"))
@@ -97,16 +92,11 @@ class CPUCoolerFrag : Fragment() {
                             recycler_view.adapter = null
                         }, 2000)
 
-
                         coolbutton.setOnClickListener {
-                            //                                 Toast.makeText(getActivity(), "CPU Temperature is Already Normal", Toast.LENGTH_SHORT).show();
-
                             val inflater = layoutInflater
                             val layout = inflater.inflate(R.layout.my_toast, null)
-
                             val text = layout.findViewById<View>(R.id.textView1) as TextView
                             text.setText(R.string.cpu_temperature_is_already_normal)
-
                             val toast = Toast(activity)
                             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 70)
                             toast.duration = Toast.LENGTH_LONG
@@ -114,43 +104,33 @@ class CPUCoolerFrag : Fragment() {
                             toast.show()
                         }
                     }
-
                     if (Build.VERSION.SDK_INT < 23) {
-
                         showsec.setTextAppearance(context, android.R.style.TextAppearance_Medium)
                         showsec.setTextColor(Color.parseColor("#F22938"))
-
                     } else {
-
                         showsec.setTextAppearance(android.R.style.TextAppearance_Small)
                         showsec.setTextColor(Color.parseColor("#F22938"))
                     }
-
-
                     recycler_view.itemAnimator = SlideInLeftAnimator()
-                    //                RecyclerView recycler_view = (RecyclerView) findViewById(R.id.list);
-                    //                recycler_view.setItemAnimator(new SlideInUpAnimator(new OvershootInterpolator(1f)));
-
                     recycler_view.itemAnimator!!.addDuration = 10000
-
                     mAdapter = RecyclerAdapter(apps)
-                    val mLayoutManager = LinearLayoutManager(activity!!.applicationContext, LinearLayoutManager.HORIZONTAL, false)
+                    val mLayoutManager = LinearLayoutManager(
+                        activity!!.applicationContext, LinearLayoutManager.HORIZONTAL, false
+                    )
                     recycler_view.layoutManager = mLayoutManager
                     recycler_view.itemAnimator = SlideInUpAnimator(OvershootInterpolator(1f))
                     recycler_view.computeHorizontalScrollExtent()
                     recycler_view.adapter = mAdapter
                     getAllICONS()
-                    //                recycler_view.getItemAnimator().setRemoveDuration(1000);
-                    //                recycler_view.getItemAnimator().setMoveDuration(1000);
-                    //                recycler_view.getItemAnimator().setChangeDuration(1000);
-
                 }
             } catch (e: Exception) {
-
             }
-
-
         }
+    }
+
+    override fun onStop() {
+        abnb_back.setAnimation("good_temp.json")
+        super.onStop()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -277,22 +257,21 @@ class CPUCoolerFrag : Fragment() {
 
 
     override fun getUserVisibleHint(): Boolean {
-
         MainActivity.setInfo(R.string.cpu_cooler)
         return userVisibleHint
 
     }
 
+    override fun onResume() {
+        abnb_back.playAnimation()
+        super.onResume()
+    }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-
-
         if (isVisibleToUser) {
             MainActivity.setInfo(R.string.cpu_cooler)
-
         } else {
-
         }
     }
 
